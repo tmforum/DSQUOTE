@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace='http://orange.com/api/quoteManagement/tmf/v1/model/business' attributeFormDefault='unqualified' elementFormDefault='qualified' xmlns='http://orange.com/api/quoteManagement/tmf/v1/model/business' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+  <xsd:annotation id='sidTag'>
+    <xsd:appinfo></xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name='ValidFor' type='ValidFor' />
+  <xsd:element name='QuoteAuthorization' type='QuoteAuthorization' />
+  <xsd:element name='Attachment' type='Attachment' />
+  <xsd:element name='QuoteProductOfferingPrice' type='QuoteProductOfferingPrice' />
+  <xsd:element name='QuotePriceAlteration' type='QuotePriceAlteration' />
+  <xsd:element name='Price' type='Price' />
+  <xsd:element name='QuoteItem' type='QuoteItem' />
+  <xsd:element name='ProductOffering' type='ProductOffering' />
+  <xsd:element name='Product' type='Product' />
+  <xsd:element name='ProductRelationship' type='ProductRelationship' />
+  <xsd:element name='Quote' type='Quote' />
+  <xsd:element name='BillingAccount' type='BillingAccount' />
+  <xsd:element name='Note' type='Note' />
+  <xsd:element name='Characteristic' type='Characteristic' />
+  <xsd:element name='Customer' type='Customer' />
+  <xsd:element name='RelatedParty' type='RelatedParty' />
+  <xsd:element name='Agreement' type='Agreement' />
+  <xsd:complexType name='ValidFor'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='startDateTime' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='endDateTime' type='xsd:dateTime' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='QuoteAuthorization'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='authorizationDate' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='authorizationState' type='xsd:string' minOccurs='0' />
+      <xsd:element name='authorizationSignatureRepresentation' type='xsd:string' minOccurs='0' />
+      <xsd:element name='attachment' type='Attachment' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Attachment'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='QuoteProductOfferingPrice'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='priceType' type='xsd:string' minOccurs='0' />
+      <xsd:element name='recurringChargePeriod' type='xsd:string' minOccurs='0' />
+      <xsd:element name='priceCondition' type='xsd:string' minOccurs='0' />
+      <xsd:element name='quotePriceAlteration' type='QuotePriceAlteration' minOccurs='0' />
+      <xsd:element name='price' type='Price' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='QuotePriceAlteration'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='description' type='xsd:string' minOccurs='0' />
+      <xsd:element name='validFor' type='ValidFor' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Price'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='percentage' type='xsd:int' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='QuoteItem'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='state' type='xsd:string' minOccurs='0' />
+      <xsd:element name='attachment' type='Attachment' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='relatedParty' type='RelatedParty' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='note' type='Note' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='productOffering' type='ProductOffering' minOccurs='0' />
+      <xsd:element name='product' type='Product' minOccurs='0' />
+      <xsd:element name='itemQuoteProductOfferingPrice' type='QuoteProductOfferingPrice' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='ProductOffering'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='bundledProductOffering' type='ProductOffering' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Product'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='relatedParty' type='RelatedParty' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='productCharacteristic' type='Characteristic' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='productRelationship' type='ProductRelationship' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='ProductRelationship'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+      <xsd:element name='product' type='Product' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Quote'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='billingAccount' type='BillingAccount' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='state' type='State' minOccurs='0' />
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='externalId' type='xsd:string' minOccurs='0' />
+      <xsd:element name='description' type='xsd:string' minOccurs='0' />
+      <xsd:element name='category' type='xsd:string' minOccurs='0' />
+      <xsd:element name='version' type='xsd:string' minOccurs='0' />
+      <xsd:element name='quoteDate' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='effectiveQuoteCompletionDate' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='quoteCompletionDate' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='notificationContact' type='xsd:string' minOccurs='0' />
+      <xsd:element name='validFor' type='ValidFor' minOccurs='0' />
+      <xsd:element name='note' type='Note' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='characteristic' type='Characteristic' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='customer' type='Customer' minOccurs='0' />
+      <xsd:element name='relatedParty' type='RelatedParty' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='agreement' type='Agreement' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='quoteProductOfferingPrice' type='QuoteProductOfferingPrice' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='quoteItem' type='QuoteItem' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='BillingAccount'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Note'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='text' type='xsd:string' minOccurs='0' />
+      <xsd:element name='date' type='xsd:dateTime' minOccurs='0' />
+      <xsd:element name='author' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Characteristic'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='value' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Customer'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='RelatedParty'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='role' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Agreement'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name='State'>
+    <xsd:restriction base='xsd:string'>
+      <xsd:enumeration value='InProgress'>
+        <xsd:annotation />
+      </xsd:enumeration>
+      <xsd:enumeration value='Pending'>
+        <xsd:annotation />
+      </xsd:enumeration>
+      <xsd:enumeration value='Cancelled'>
+        <xsd:annotation />
+      </xsd:enumeration>
+      <xsd:enumeration value='Approved'>
+        <xsd:annotation />
+      </xsd:enumeration>
+      <xsd:enumeration value='Accepted'>
+        <xsd:annotation />
+      </xsd:enumeration>
+      <xsd:enumeration value='Rejected'>
+        <xsd:annotation />
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

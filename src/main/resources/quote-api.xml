@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<api xmlns="http://orange.com/soa/schemas/oadl/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="quoteManagement" projectName="tmf" majorVersion="1" minorVersion="0" namespace="http://orange.com/api/quoteManagement/tmf/v1" xsi:schemaLocation="http://orange.com/soa/schemas/oadl/v1 oadl.xsd">
+    <model location="model_business.xsd" namespace="http://orange.com/api/quoteManagement/tmf/v1/model/business"/>
+    <resource class="Quote">
+        <actions>
+            <create>
+                <doc lang="fr">This operation is used to create a new quote (V1.0) or a new version of an existing quote (Vn.n n=&gt; 1)</doc>
+            </create>
+            <find>
+                <doc lang="fr">This operation is used to retrieve quote information using filter criteria.  
+If the version is not filled, by default only the most current version is returned.</doc>
+                <param type="string" name="fields" header="false" required="false">
+                    <doc>For attribute selection</doc>
+                </param>
+                <param type="string" name="state" header="false" required="false">
+                    <doc>quote state</doc>
+                </param>
+                <param type="string" name="category" header="false" required="false">
+                    <doc>quote category</doc>
+                </param>
+                <param type="string" name="andSoOn..." header="false" required="false">
+                    <doc>cf specification</doc>
+                </param>
+            </find>
+            <get>
+                <doc lang="fr">This operation is used to retrieve quote information using the ID. If the version is not filled, by default only the most current version is returned.</doc>
+            </get>
+            <patch>
+                <doc lang="fr">This operation is used to modify quote and/or their items.  
+By default PATCH will be acting only on the latest version of the Resource.</doc>
+            </patch>
+        </actions>
+    </resource>
+</api>
