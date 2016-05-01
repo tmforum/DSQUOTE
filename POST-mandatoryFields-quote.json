@@ -1,0 +1,59 @@
+{
+    "version": "1.0",
+    "customer":{
+    "id":"345221",
+    "href":"http://serverlocation:port/customerManagement/customer/345221",
+    "name":"John Doe"
+    },
+    "quoteItem":[
+        {
+            "id":"1",
+            "productOffering":{
+                "id":"42",
+                "href":"http: //serverlocation: port/catalogManagement/productOffering/42"
+            },
+            "product":{
+                "productCharacteristic":[
+                    {
+                        "name":"Colour",
+                        "value":"White"
+                    },
+                    {
+                        "name":"Memory",
+                    "value":"16"
+                    }
+                ]
+            }
+        },
+        {
+            "id":"2",
+            "productOffering":{
+				"id":" SamPhone i5s ",
+				"href":"http: //serverlocation: port/catalogManagement/productOffering/SamPhonei5s "
+			},
+			"product":{
+                "id":"456",
+                "href":"http: //serverlocation: port/inventoryManagement/product/456",
+                "relatedParty":[
+                    {
+                        "role":"user",
+                        "id":"5667443",
+                        "href":"http://serverlocation:port/partyManagement/user/5667443",
+                        "name":"Jimmy Doe"
+                    }
+                ]
+            }
+        },
+        {
+            "id":"3",
+			"productOffering":{
+				"id":" TMF Fiber+",
+				"href":"http: //serverlocation: port/catalogManagement/productOffering/TMFFiber+"
+			},
+            "product":{
+                "id":"456",
+                "href":"http: //serverlocation: port/inventoryManagement/product/456"
+                }
+        }
+    ]
+}

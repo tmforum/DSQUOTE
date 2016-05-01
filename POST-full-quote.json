@@ -1,0 +1,238 @@
+{
+"id":"421",
+"href":"http://serverlocation:port/quoteManagement/Quote/42",
+"externalId":"QuoteForTheConsumer_42",
+"description":"A wonderful 42 quote for brand new products",
+"category":"corporate",
+"state":"InProgress",
+"version":"1.0",
+"quoteDate":"2013-04-12T16:42:23-04:00",
+"effectiveQuoteCompletionDate":"",
+"quoteCompletionDate":"2013-04-19T16:42:23-04:00",
+"notificationContact":"bill.dupont@hotmail.com",
+    "customer":{
+    "id":"345221",
+    "href":"http://serverlocation:port/customerManagement/customer/345221",
+    "name":"John Doe"
+    },
+"validFor":{
+    "startDateTime":"2013-04-12T16:42:23-04:00",
+    "endDateTime":"2013-04-19T00:00:00-04:00"
+    },
+"billingAccount":[
+    {
+    "id":"123456",
+    "href":"http://serverlocation:port/billingManagement/billingAccount/123456"
+    }
+],
+"note":[
+    {
+    "text":"Quote following opportunity #2345",
+    "date":"2013-04-12T16:42:23-04:00",
+    "author":"Bill Dupont"
+    }
+],
+"characteristic":[
+    {
+    "name":"Business Unit",
+    "value":"London South West Cor^porate"
+    }
+],
+"customer":{
+    "id":"345221",
+    "href":"http://serverlocation:port/customerManagement/customer/345221",
+    "name":"John Doe"
+},
+"relatedParty":[
+    {
+    "role":"authorizer",
+    "id":"57",
+    "href":"http://serverlocation:port/partyManagement/partner/57",
+    "name":"Shinoju White"
+    },
+    {
+    "role":"seller",
+    "id":"4563",
+    "href":"http://serverlocation:port/partnerManagement/partner/4563",
+    "name":"Bill Dupont"
+    }
+],
+"agreement":[
+    {
+    "id":"45",
+    "href":"http://serverlocation:port/engagedPartyManagement/agreement/45",
+    "name":" standard disclaimer"
+    }
+],
+"quoteAuthorization":[
+    {
+    "authorizationDate":"2013-04-12T16:42:23-04:00",
+    "authorizationState":"approved",
+    "authorizationSignatureRepresentation":"digital",
+    "attachment":{
+        "id":"22",
+        "href":"http://serverlocation:port/documentManagement/attachment/22",
+        "type":"pdf"
+    },
+    "quoteProductOfferingPrice":[{
+        "quotePriceAlteration":{
+            "name":"Global Discount",
+            "description":"5% for all recurring charge",
+            "validFor":"",
+            "startDateTime":"2013-04-19T16:42:23.0Z"
+            },
+            "priceType":"recurrent",
+            "unitOfMeasure":"",
+            "price":{
+                "percentage":5
+            },
+            "recurringChargePeriod":"",
+            "priceCondition":"applied if all quote items are purchased"
+        }]
+    }
+],
+"quoteItem":[
+    {
+    "id":"1",
+    "state":"InProgress",
+    "attachment":{
+        "id":"22",
+        "href":"http://serverlocation:port/documentManagement/attachment/TMFVoiceEXtraRationale.pdf",
+        "type":"pdf"
+    },
+    "relatedParty":[
+        {
+        "role":"customer",
+        "id":"345221",
+        "href":"http://serverlocation:port/partyManagement/customer/345221",
+        "name":"John Doe"
+        },
+        {
+        "role":"seller",
+        "id":"4563",
+        "href":"http://serverlocation:port/partnerManagement/partner/4563",
+        "name":"Bill Dupont"
+        }
+    ],
+    "productOffering":{
+        "id":"198",
+        "href":"http: //serverlocation: port/catalogManagement/productOffering/198"
+    },
+    "product":{ }
+    },
+    {
+    "id":"2",
+    "state":"InProgress",
+    "note":[
+        {
+        "text":"xxxx",
+        "date":"2013-04-12T16:42:23-04:00",
+        "author":"Bill Dupont"
+        }
+    ],
+    "itemQuoteAuthorization":[
+        {
+        "authorizationDate":"2013-04-12T18:42:23-04:00",
+        "authorizationState":"approved",
+        "authorizationSignatureRepresentation":"digital ",
+        "attachment":{
+            "id":"22",
+            "href":"http://serverlocation:port/documentManagement/attachment/22",
+            "type":"JPG"
+        },
+        "relatedParty":[
+            {
+            "role":"authorizer",
+            "id":"242",
+            "href":"http://serverlocation:port/partyManagement/partner/242",
+            "name":"Shinoju White"
+            }
+        ]
+        }
+    ],
+    "productOffering":{
+        "id":" SamPhone i5s ",
+        "href":"http: //serverlocation: port/catalogManagement/productOffering/SamPhonei5s "
+    },
+    "product":{
+        "productCharacteristic":[
+            {
+            "name":"color",
+            "value":"pink"
+            }
+        ],
+        "relatedParty":[{
+            "role":"user",
+            "id":"5667443",
+            "href":"http://serverlocation:port/partyManagement/user/5667443",
+            "name":"Samantha Doe"
+            }]
+    }
+    },
+    {
+    "id":"3",
+    "state":"InProgress",
+    "note":[
+        {
+        "text":"The leased line should be directly plugged from Joe’s Office",
+        "date":"2013-04-12T16:42:23-04:00",
+        "author":"Bill Dupont"
+        }
+    ],
+    "productOffering":{
+        "id":" TMF Fiber+",
+        "href":"http: //serverlocation: port/catalogManagement/productOffering/TMFFiber+"
+    },
+    "product":{
+        "productCharacteristic":[
+            {
+            "name":"Speed",
+            "value":"100 Mo/s"
+            },
+            {
+            "name":"Site A",
+            "value":"12 Dupont Circle, 34511 Washington DC"
+            },
+            {
+            "name":"Site B",
+            "value":"436 25th Avenue, 34507 Washington DC"
+            }
+        ]
+    }
+    },
+    {
+    "id":"4",
+    "state":"InProgress",
+    "itemQuoteProductOfferingPrice":[{
+        "itemQuotePriceAlteration":{
+        "name":"Discount on Bundle TV channel",
+        "description":"Movie + sport is so fun",
+        "validFor":{
+            "startDateTime":"2013-04-19T16:42:23.0Z"
+        },
+        "priceType":"recurrent",
+        "unitOfMeasure":"",
+        "price":{
+            "override":23.87
+        },
+        "recurringChargePeriod":"monthly",
+        "priceCondition":""
+        }
+    }],
+    "productOffering":{
+        "id":"TM TV+",
+        "href":"http://serverlocation:port/catalogManagement/productOffering/BundleTMTV+",
+        "bundledProductOffering":[
+            {
+            "id":" Sport TV Channel",
+            "href":"http://serverlocation:port/catalogManagement/productOffering/SportChannel"
+            },
+            {
+            "id":" Movie TV channel",
+            "href":"http://serverlocation:port/catalogManagement/productOffering/MovieChannel"
+            }
+        ]
+    }
+    }
+    ]
+}
