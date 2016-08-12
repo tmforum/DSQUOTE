@@ -175,4 +175,22 @@ public class Attachment
         this.hjid = value;
     }
 
+    public boolean equals(Attachment attachment) {
+        if (null!=this.getId() && null!=attachment.getId() && !this.getId().equals(attachment.getId())
+                || null!=this.getId()&& null==attachment.getId()
+                || null==this.getId()&& null!=attachment.getId()) {
+            return false;
+        }
+        if (null!=this.getHref()&& null!=attachment.getHref() && !this.getHref().equals(attachment.getHref())
+                || null!=this.getHref()&& null==attachment.getHref()
+                || null==this.getHref()&& null!=attachment.getHref()) {
+            return false;
+        }
+        if (null!=this.getType()&& null!=attachment.getType() && !this.getType().equals(attachment.getType())
+                || null!=this.getType()&& null==attachment.getType()
+                || null==this.getType()&& null!=attachment.getType()) {
+            return false;
+        }
+        return true;
+    }
 }

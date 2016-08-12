@@ -58,7 +58,7 @@ public class QuoteEventPublisher implements QuoteEventPublisherLocal {
         QuoteEvent event = new QuoteEvent();
         event.setEventTime(date);
         event.setEventType(QuoteEventTypeEnum.QuoteCreationNotification);
-        event.setResource(bean);
+        //event.setResource(bean);
         publish(event);
 
     }
@@ -68,7 +68,7 @@ public class QuoteEventPublisher implements QuoteEventPublisherLocal {
         QuoteEvent event = new QuoteEvent();
         event.setEventTime(date);
         event.setEventType(QuoteEventTypeEnum.QuoteDeletionNotification);
-        event.setResource(bean);
+        //event.setResource(bean);
         publish(event);
     }
 	
@@ -77,7 +77,7 @@ public class QuoteEventPublisher implements QuoteEventPublisherLocal {
         QuoteEvent event = new QuoteEvent();
         event.setEventTime(date);
         event.setEventType(QuoteEventTypeEnum.QuoteUpdateNotification);
-        event.setResource(bean);
+        //event.setResource(bean);
         publish(event);
     }
 
@@ -86,7 +86,7 @@ public class QuoteEventPublisher implements QuoteEventPublisherLocal {
         QuoteEvent event = new QuoteEvent();
         event.setEventTime(date);
         event.setEventType(QuoteEventTypeEnum.QuoteValueChangeNotification);
-        event.setResource(bean);
+        //event.setResource(bean);
         publish(event);
     }
 
@@ -95,7 +95,7 @@ public class QuoteEventPublisher implements QuoteEventPublisherLocal {
         QuoteEvent event = new QuoteEvent();
         event.setEventTime(date);
         event.setEventType(QuoteEventTypeEnum.QuoteStatusChangedNotification);
-        event.setResource(bean);
+        //event.setResource(bean);
         publish(event);
     }
 

@@ -145,5 +145,22 @@ public class BillingAccount
     public void setHjid(Long value) {
         this.hjid = value;
     }
+    
+    public boolean equals(BillingAccount billingAccount) {
+        if ((null!=this.getId()&& null!= billingAccount.getId() 
+                && !this.getId().equals(billingAccount.getId()))
+                || null!=this.getId()&& null==billingAccount.getId()
+                || null==this.getId()&& null!=billingAccount.getId() ) {
+            return false;
+        }
+        if ((null!=this.getHref()&& null!= billingAccount.getHref() 
+                && !this.getHref().equals(billingAccount.getHref()))
+                || null!=this.getHref()&& null==billingAccount.getHref()
+                || null==this.getHref()&& null!=billingAccount.getHref() ) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

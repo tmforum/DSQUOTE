@@ -65,9 +65,10 @@ public class BeanUtils {
             childNode = node.get(name);
             if (null != patchValue) {
                 if (childNode.isArray() && !childNode.isNull()) {
-                    for (final JsonNode nodeArray : childNode) {
+                    //for (final JsonNode nodeArray : childNode) {
+                    for (int i=0; i<childNode.size();i++) {
                         value = BeanUtils.getNestedProperty(currentBean, name);
-                        patch(value, patchValue, nodeArray);
+                        patch(value, patchValue, childNode);
                         BeanUtils.setNestedProperty(currentBean, name, patchValue);
                         isModified = true;
                     }

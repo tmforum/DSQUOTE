@@ -29,12 +29,15 @@ public class Current extends HttpServlet {
         List<EventBag> events = subscriberFacade.findAll();
         ServletOutputStream servletOut = response.getOutputStream();
         EventBag mostRecentNotif = null;
-        for (int i = 0; events.size() > i; i++) {
-            mostRecentNotif = events.get(i);
-            if (events.get(i).getDateEvent().after(mostRecentNotif.getDateEvent())) {
-                mostRecentNotif = events.get(i);
+        if (null != events && events.size() > 0){
+            mostRecentNotif = events.get(0);
+            for (int i = 0; events.size()-1 > i; i++) {
+                if (events.get(i+1).getDateEvent().after(mostRecentNotif.getDateEvent())) {
+                    mostRecentNotif = events.get(i);
+                }
             }
         }
+        
         if (null != mostRecentNotif) {
             servletOut.write(mostRecentNotif.getEvent());
             response.setContentType("application/json");

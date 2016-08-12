@@ -185,5 +185,27 @@ public class Note
     public void setHjid(Long value) {
         this.hjid = value;
     }
-
+    
+    public boolean equals(Note note) {
+        if ((null!=this.getAuthor()&& null!= note.getAuthor() 
+                && !this.getAuthor().equals(note.getAuthor()))
+                || null!=this.getAuthor()&& null==note.getAuthor()
+                || null==this.getAuthor()&& null!=note.getAuthor() ) {
+            return false;
+        }
+        if ((null!=this.getText()&& null!= note.getText() 
+                && !this.getText().equals(note.getText()))
+                || null!=this.getText()&& null==note.getText()
+                || null==this.getText()&& null!=note.getText() ) {
+            return false;
+        }
+        if ((null!=this.getDate()&& null!= note.getDate() 
+                && !this.getDate().toString().equals(note.getDate().toString()))
+                || null!=this.getDate()&& null==note.getDate()
+                || null==this.getDate()&& null!=note.getDate() ) {
+            return false;
+        }
+        
+        return true;
+    }
 }

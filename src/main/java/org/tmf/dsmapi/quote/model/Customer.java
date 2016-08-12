@@ -175,4 +175,27 @@ public class Customer
         this.hjid = value;
     }
 
+    public boolean equals(Customer cus) {
+        if ((null!=this.getId()&& null!= cus.getId() 
+                && !this.getId().equals(cus.getId()))
+                || null!=this.getId()&& null==cus.getId()
+                || null==this.getId()&& null!=cus.getId() ) {
+            return false;
+        }
+        if ((null!=this.getName()&& null!= cus.getName() 
+                && !this.getName().equals(cus.getName()))
+                || null!=this.getName()&& null==cus.getName()
+                || null==this.getName()&& null!=cus.getName() ) {
+            return false;
+        }
+
+        if ((null!=this.getHref()&& null!= cus.getHref() 
+                && !this.getHref().equals(cus.getHref()))
+                || null!=this.getHref()&& null==cus.getHref()
+                || null==this.getHref()&& null!=cus.getHref() ) {
+            return false;
+        }
+        return true;
+    }
+    
 }

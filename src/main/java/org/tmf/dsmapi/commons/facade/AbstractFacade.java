@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -95,6 +96,16 @@ public abstract class AbstractFacade<T> {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
     
+    /**
+     *
+     * @param id
+     * @throws UnknownResourceException
+     */
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)    
+    public void removeQuoteWithVersion(T entity) throws UnknownResourceException {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
+    
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void removeAll() {
         List<T> all = findAll();
@@ -104,6 +115,13 @@ public abstract class AbstractFacade<T> {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void removeAllQuote(List<T> all) {
+        EntityManager em = getEntityManager();
+        for (T entity : all) {
+            em.remove(getEntityManager().merge(entity));
+        }
+    }
     /**
      *
      * @param id
@@ -205,6 +223,7 @@ public abstract class AbstractFacade<T> {
                 andPredicates.add(predicate);
             }
             cq.where(andPredicates.toArray(new Predicate[andPredicates.size()]));
+            cq.orderBy(criteriaBuilder.desc(tt.get("version")));
             cq.select(tt);
             TypedQuery<T> q = getEntityManager().createQuery(cq);
             resultsList = q.getResultList();

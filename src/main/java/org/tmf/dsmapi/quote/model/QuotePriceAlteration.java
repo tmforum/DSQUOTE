@@ -180,4 +180,25 @@ public class QuotePriceAlteration
         this.hjid = value;
     }
 
+    public boolean equals(QuotePriceAlteration quotePriceAl) {
+        if (null !=this.getDescription() && null!=quotePriceAl.getDescription() 
+                && !this.getDescription().equals(quotePriceAl.getDescription()) 
+                || null!=this.getDescription()&& null==quotePriceAl.getDescription()
+                || null==this.getDescription()&& null!=quotePriceAl.getDescription()) {
+            return false;
+        }
+        if (null !=this.getName()&& null!=quotePriceAl.getName() 
+                && !this.getName().equals(quotePriceAl.getName()) 
+                || null!=this.getName()&& null==quotePriceAl.getName()
+                || null==this.getName()&& null!=quotePriceAl.getName()) {
+            return false;
+        }
+        if (null !=this.getValidFor()&& null!=quotePriceAl.getValidFor() 
+                && !this.getValidFor().equals(quotePriceAl.getValidFor()) 
+                || null!=this.getValidFor()&& null==quotePriceAl.getValidFor()
+                || null==this.getValidFor()&& null!=quotePriceAl.getValidFor()) {
+            return false;
+        }
+        return true;
+    }
 }

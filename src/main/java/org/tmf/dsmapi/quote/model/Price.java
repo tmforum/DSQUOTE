@@ -47,7 +47,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Price", propOrder = {
-    "percentage"
+    "percentage",
+    "override"
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity(name = "Price")
@@ -60,6 +61,7 @@ public class Price
 
     private final static long serialVersionUID = 11L;
     protected Integer percentage;
+    protected Double override;
     
     protected Long hjid;
 
@@ -90,6 +92,32 @@ public class Price
     }
 
     /**
+     * Obtient la valeur de la propriété percentage.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    @Basic
+    @Column(name = "OVERRIDE", precision = 10, scale = 0)
+    public Double getOverride() {
+        return override;
+    }
+
+    /**
+     * Définit la valeur de la propriété percentage.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setOverride(Double value) {
+        this.override = value;
+    }
+    
+    /**
      * Obtient la valeur de la propriété hjid.
      * 
      * @return
@@ -115,6 +143,22 @@ public class Price
      */
     public void setHjid(Long value) {
         this.hjid = value;
+    }
+    
+    public boolean equals(Price price) {
+        if (null !=this.getOverride()&& null!=price.getOverride() 
+                && !this.getOverride().equals(price.getOverride()) 
+                || null!=this.getOverride()&& null==price.getOverride()
+                || null==this.getOverride()&& null!=price.getOverride()) {
+            return false;
+        }
+        if (null !=this.getPercentage()&& null!=price.getPercentage() 
+                && !this.getPercentage().equals(price.getPercentage()) 
+                || null!=this.getPercentage()&& null==price.getPercentage()
+                || null==this.getPercentage()&& null!=price.getPercentage()) {
+            return false;
+        }
+        return true;
     }
 
 }

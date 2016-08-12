@@ -146,4 +146,20 @@ public class Characteristic
         this.hjid = value;
     }
 
+    public boolean equals(Characteristic charac) {
+        if ((null!=this.getName() && null!= charac.getName() 
+                && !this.getName().equals(charac.getName()))
+                || null!=this.getName()&& null==charac.getName()
+                || null==this.getName()&& null!=charac.getName()) {
+            return false;
+        }
+        if ((null!=this.getValue()&& null!= charac.getValue() 
+                && !this.getValue().equals(charac.getValue()))
+                || null!=this.getValue()&& null==charac.getValue()
+                || null==this.getValue()&& null!=charac.getValue() ) {
+            return false;
+        }
+        
+        return true;
+    }
 }

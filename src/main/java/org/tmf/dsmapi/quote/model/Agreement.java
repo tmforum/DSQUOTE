@@ -175,4 +175,28 @@ public class Agreement
         this.hjid = value;
     }
 
+    public boolean equals(Agreement agreement) {
+
+        if ((null!=this.getName() && null!= agreement.getName() 
+                && !this.getName().equals(agreement.getName()))
+                || null!=this.getName()&& null==agreement.getName()
+                || null==this.getName()&& null!=agreement.getName() ) {
+            return false;
+        }
+        if ((null!=this.getId()&& null!= agreement.getId() 
+                && !this.getId().equals(agreement.getId()))
+                || null!=this.getId()&& null==agreement.getId()
+                || null==this.getId()&& null!=agreement.getId() ) {
+            return false;
+        }
+        if ((null!=this.getHref()&& null!= agreement.getHref() 
+                && !this.getHref().equals(agreement.getHref()))
+                || null!=this.getHref()&& null==agreement.getHref()
+                || null==this.getHref()&& null!=agreement.getHref() ) {
+            return false;
+        }
+
+        return true;
+    }
+    
 }

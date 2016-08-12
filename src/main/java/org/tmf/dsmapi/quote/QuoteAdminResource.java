@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import org.tmf.dsmapi.commons.exceptions.BadUsageException;
+import org.tmf.dsmapi.commons.exceptions.ExceptionType;
 import org.tmf.dsmapi.commons.exceptions.UnknownResourceException;
 import org.tmf.dsmapi.commons.jaxrs.Report;
 import org.tmf.dsmapi.quote.model.Quote;
@@ -135,11 +136,15 @@ public class QuoteAdminResource {
      * @throws UnknownResourceException
      */
     @DELETE
-    @Path("{id}")
-    public Response delete(@PathParam("id") String id) throws UnknownResourceException {
+    @Path("{id}:(version={version})")
+    public Response delete(@PathParam("id") String id, @PathParam("version") String ver) throws UnknownResourceException {
         int previousRows = quoteFacade.count();
-        Quote entity = quoteFacade.find(id);
-
+        //Quote entity = quoteFacade.find(id);
+        Quote entity = quoteFacade.findQuoteByIdAndVersion(id, ver);
+        if (entity == null) {
+            throw new UnknownResourceException(ExceptionType.UNKNOWN_RESOURCE,
+                        "not found quote with id :" + id + " and the version :" + ver);
+        }
         try {
             //Pause for 4 seconds to finish notification
             Thread.sleep(4000);
@@ -149,12 +154,12 @@ public class QuoteAdminResource {
         // remove event(s) binding to the resource
         List<QuoteEvent> events = eventFacade.findAll();
         for (QuoteEvent event : events) {
-            if (event.getResource().getId().equals(id)) {
-                eventFacade.remove(event.getId());
-            }
+//            if (event.getResource().getId().equals(id)) {
+//                eventFacade.remove(event.getId());
+//            }
         }
         //remove resource
-        quoteFacade.remove(id);
+        quoteFacade.removeQuoteWithVersion(entity);
 
         int affectedRows = 1;
         Report stat = new Report(quoteFacade.count());
@@ -166,6 +171,49 @@ public class QuoteAdminResource {
         return response;
     }
 
+    /**
+     *
+     * For test purpose only
+     * @param id
+     * @return
+     * @throws UnknownResourceException
+     */
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") String id) throws UnknownResourceException {
+        int previousRows = quoteFacade.count();
+        List<Quote> allEntity = quoteFacade.findAllQuoteById(id);
+        if (null == allEntity || allEntity.isEmpty()) {
+            throw new UnknownResourceException(ExceptionType.UNKNOWN_RESOURCE,
+                        "not found quote with id :" + id);
+        }
+        try {
+            //Pause for 4 seconds to finish notification
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(QuoteAdminResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // remove event(s) binding to the resource
+        List<QuoteEvent> events = eventFacade.findAll();
+        for (QuoteEvent event : events) {
+//            if (event.getResource().getId().equals(id)) {
+//                eventFacade.remove(event.getId());
+//            }
+        }
+        //remove resource
+        quoteFacade.removeAllQuote(allEntity);
+
+        int affectedRows = 1;
+        Report stat = new Report(quoteFacade.count());
+        //stat.setAffectedRows(affectedRows);
+        stat.setAffectedRows(allEntity.size());
+        stat.setPreviousRows(previousRows);
+
+        // 200 
+        Response response = Response.ok(stat).build();
+        return response;
+    }
+    
     @GET
     @Produces({"application/json"})
     @Path("event")
@@ -196,10 +244,10 @@ public class QuoteAdminResource {
         int previousRows = eventFacade.count();
         List<QuoteEvent> events = eventFacade.findAll();
         for (QuoteEvent event : events) {
-            if (event.getResource().getId().equals(id)) {
-                eventFacade.remove(event.getId());
-
-            }
+//            if (event.getResource().getId().equals(id)) {
+//                eventFacade.remove(event.getId());
+//
+//            }
         }
         int currentRows = eventFacade.count();
         int affectedRows = previousRows - currentRows;
