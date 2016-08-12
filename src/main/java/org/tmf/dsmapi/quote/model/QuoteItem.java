@@ -93,6 +93,7 @@ public class QuoteItem
     protected ProductOffering productOffering;
     protected Product product;
     protected List<QuoteProductOfferingPrice> itemQuoteProductOfferingPrice;
+    protected List<QuoteAuthorization> itemQuoteAuthorization;
     
     protected Long hjid;
 
@@ -418,6 +419,26 @@ public class QuoteItem
         this.itemQuoteProductOfferingPrice = itemQuoteProductOfferingPrice;
     }
 
+    @OneToMany(targetEntity = QuoteAuthorization.class, cascade = {
+        CascadeType.ALL
+    })
+    @JoinColumn(name = "ITEM_QUOTE_AUTHORIZATION_QUOTE_ID")
+    public List<QuoteAuthorization> getItemQuoteAuthorization() {
+        if (itemQuoteAuthorization == null) {
+            itemQuoteAuthorization = new ArrayList<QuoteAuthorization>();
+        }
+        return this.itemQuoteAuthorization;
+    }
+
+    /**
+     * 
+     * 
+     */
+    public void setItemQuoteAuthorization(List<QuoteAuthorization> itemQuoteAuthorization) {
+        this.itemQuoteAuthorization = itemQuoteAuthorization;
+    }
+    
+    
     /**
      * Obtient la valeur de la propriété hjid.
      * 

@@ -161,4 +161,20 @@ public class ValidFor
         this.hjid = value;
     }
 
+    public boolean equals(ValidFor var) {
+        if ((null!=this.getStartDateTime()&& null!= var.getStartDateTime() 
+                && !this.getStartDateTime().toString().equals(var.getStartDateTime().toString()))
+                || null!=this.getStartDateTime()&& null==var.getStartDateTime()
+                || null==this.getStartDateTime()&& null!=var.getStartDateTime()) {
+            return false;
+        }
+        if ((null!=this.getEndDateTime()&& null!= var.getEndDateTime() 
+                && !this.getEndDateTime().toString().equals(var.getEndDateTime().toString()))
+                || null!=this.getEndDateTime()&& null==var.getEndDateTime()
+                || null==this.getEndDateTime()&& null!=var.getEndDateTime() ) {
+            return false;
+        }
+    
+        return  true;
+    }
 }

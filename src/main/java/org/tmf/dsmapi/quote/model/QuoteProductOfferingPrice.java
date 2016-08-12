@@ -58,7 +58,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
     "recurringChargePeriod",
     "priceCondition",
     "quotePriceAlteration",
-    "price"
+    "price",
+    "unitOfMeasure"
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity(name = "QuoteProductOfferingPrice")
@@ -75,6 +76,7 @@ public class QuoteProductOfferingPrice
     protected String priceCondition;
     protected QuotePriceAlteration quotePriceAlteration;
     protected Price price;
+    protected String unitOfMeasure;
     
     protected Long hjid;
 
@@ -212,6 +214,35 @@ public class QuoteProductOfferingPrice
         this.price = value;
     }
 
+    
+    
+    /**
+     * Obtient la valeur de la propriété priceType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    @Basic
+    @Column(name = "UNIT_OF_MEASURE", length = 255)
+    public String getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    /**
+     * Définit la valeur de la propriété priceType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUnitOfMeasure(String value) {
+        this.unitOfMeasure = value;
+    }
+    
+    
     /**
      * Obtient la valeur de la propriété hjid.
      * 
@@ -240,4 +271,53 @@ public class QuoteProductOfferingPrice
         this.hjid = value;
     }
 
+    public boolean equals(QuoteProductOfferingPrice offerPrice) {
+        if (null != this.getPrice()&& null != offerPrice.getPrice() 
+                && !this.getPrice().equals(offerPrice.getPrice())
+                || null!=this.getPrice()&& null==offerPrice.getPrice()
+                || null==this.getPrice()&& null!=offerPrice.getPrice()  ) {
+            return false;
+        }
+        if (null != this.getPriceCondition()&& null != offerPrice.getPriceCondition() 
+                && !this.getPriceCondition().equals(offerPrice.getPriceCondition())
+                || null!=this.getPriceCondition()&& null==offerPrice.getPriceCondition()
+                || null==this.getPriceCondition()&& null!=offerPrice.getPriceCondition() ) {
+            return false;
+        }
+        if (null != this.getPriceType()&& null != offerPrice.getPriceType() 
+                && !this.getPriceType().equals(offerPrice.getPriceType())
+                || null!=this.getPriceType()&& null==offerPrice.getPriceType()
+                || null==this.getPriceType()&& null!=offerPrice.getPriceType() ) {
+            return false;
+        }
+        if (null != this.getQuotePriceAlteration() && null != offerPrice.getQuotePriceAlteration() 
+                && !this.getQuotePriceAlteration().equals(offerPrice.getQuotePriceAlteration())
+                || null!=this.getQuotePriceAlteration()&& null==offerPrice.getQuotePriceAlteration()
+                || null==this.getQuotePriceAlteration()&& null!=offerPrice.getQuotePriceAlteration() ) {
+            return false;
+        }
+        if (null != this.getRecurringChargePeriod()&& null != offerPrice.getRecurringChargePeriod() 
+                && !this.getRecurringChargePeriod().equals(offerPrice.getRecurringChargePeriod())
+                || null!=this.getRecurringChargePeriod()&& null==offerPrice.getRecurringChargePeriod()
+                || null==this.getRecurringChargePeriod()&& null!=offerPrice.getRecurringChargePeriod()) {
+            return false;
+        }
+        if (null != this.getUnitOfMeasure()&& null != offerPrice.getUnitOfMeasure() 
+                && !this.getUnitOfMeasure().equals(offerPrice.getUnitOfMeasure())
+                || null!=this.getUnitOfMeasure()&& null==offerPrice.getUnitOfMeasure()
+                || null==this.getUnitOfMeasure()&& null!=offerPrice.getUnitOfMeasure()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean isEqualsQuotePriceAlteration (QuoteProductOfferingPrice offerPrice) {
+        if (null != this.getQuotePriceAlteration() && null != offerPrice.getQuotePriceAlteration() 
+                && this.getQuotePriceAlteration().equals(offerPrice.getQuotePriceAlteration())
+                || null!=this.getQuotePriceAlteration()&& null==offerPrice.getQuotePriceAlteration()
+                || null==this.getQuotePriceAlteration()&& null!=offerPrice.getQuotePriceAlteration() ) {
+            return false;
+        }
+        return true;
+    }
 }

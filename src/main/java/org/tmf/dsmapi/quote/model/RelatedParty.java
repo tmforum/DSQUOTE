@@ -203,5 +203,34 @@ public class RelatedParty
     public void setHjid(Long value) {
         this.hjid = value;
     }
+    
+    public boolean equals(RelatedParty relatedParty) {
+        if ((null!=this.getId()&& null!= relatedParty.getId() 
+                && !this.getId().equals(relatedParty.getId()))
+                || null!=this.getId()&& null==relatedParty.getId()
+                || null==this.getId()&& null!=relatedParty.getId() ) {
+            return false;
+        }
+        if ((null!=this.getName()&& null!= relatedParty.getName() 
+                && !this.getName().equals(relatedParty.getName()))
+                || null!=this.getName()&& null==relatedParty.getName()
+                || null==this.getName()&& null!=relatedParty.getName() ) {
+            return false;
+        }
+        if ((null!=this.getRole()&& null!= relatedParty.getRole() 
+                && !this.getRole().equals(relatedParty.getRole()))
+                || null!=this.getRole()&& null==relatedParty.getRole()
+                || null==this.getRole()&& null!=relatedParty.getRole() ) {
+            return false;
+        }
+        if ((null!=this.getHref()&& null!= relatedParty.getHref() 
+                && !this.getHref().equals(relatedParty.getHref()))
+                || null!=this.getHref()&& null==relatedParty.getHref()
+                || null==this.getHref()&& null!=relatedParty.getHref() ) {
+            return false;
+        }
+        
+        return true;
+    }
 
 }

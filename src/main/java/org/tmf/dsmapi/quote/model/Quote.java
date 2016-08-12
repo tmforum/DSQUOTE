@@ -25,6 +25,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.persistence.IdClass;
 import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
 
 
@@ -68,6 +70,7 @@ import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
  *         &lt;element name="customer" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}Customer" minOccurs="0"/>
  *         &lt;element name="relatedParty" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}RelatedParty" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="agreement" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}Agreement" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="quoteAuthorization" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}QuoteAuthorization" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="quoteProductOfferingPrice" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}QuoteProductOfferingPrice" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="quoteItem" type="{http://orange.com/api/quoteManagement/tmf/v1/model/business}QuoteItem" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -98,6 +101,7 @@ import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
     "customer",
     "relatedParty",
     "agreement",
+    "quoteAuthorization",
     "quoteProductOfferingPrice",
     "quoteItem"
 })
@@ -106,6 +110,7 @@ import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
 @Table(name = "QUOTE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(length = 127)
+@IdClass(QuotePK.class)
 public class Quote
     implements Serializable
 {
@@ -138,6 +143,7 @@ public class Quote
     protected Customer customer;
     protected List<RelatedParty> relatedParty;
     protected List<Agreement> agreement;
+    protected List<QuoteAuthorization> quoteAuthorization;
     protected List<QuoteProductOfferingPrice> quoteProductOfferingPrice;
     protected List<QuoteItem> quoteItem;
 
@@ -166,7 +172,11 @@ public class Quote
     @OneToMany(targetEntity = BillingAccount.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "BILLING_ACCOUNT_QUOTE_ID")
+    //@JoinColumn(name = "BILLING_ACCOUNT_QUOTE_ID")
+    @JoinColumns({
+        @JoinColumn(name = "BILLING_ACCOUNT_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "BILLING_ACCOUNT_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<BillingAccount> getBillingAccount() {
         if (billingAccount == null) {
             billingAccount = new ArrayList<BillingAccount>();
@@ -218,7 +228,7 @@ public class Quote
      *     
      */
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID",nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     public String getId() {
         return id;
@@ -348,8 +358,8 @@ public class Quote
      *     {@link String }
      *     
      */
-    @Basic
-    @Column(name = "VERSION_", length = 255)
+    @Id
+    @Column(name = "VERSION_",nullable = false, length = 255)
     public String getVersion() {
         return version;
     }
@@ -526,7 +536,11 @@ public class Quote
     @OneToMany(targetEntity = Note.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "NOTE_QUOTE_ID")
+    //@JoinColumn(name = "NOTE_QUOTE_ID", referencedColumnName = "ID")
+    @JoinColumns({
+        @JoinColumn(name = "NOTE_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "NOTE_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<Note> getNote() {
         if (note == null) {
             note = new ArrayList<Note>();
@@ -567,7 +581,11 @@ public class Quote
     @OneToMany(targetEntity = Characteristic.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "CHARACTERISTIC_QUOTE_ID")
+    //@JoinColumn(name = "CHARACTERISTIC_QUOTE_ID", referencedColumnName = "ID")
+    @JoinColumns({
+        @JoinColumn(name = "CHARACTERISTIC_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "CHARACTERISTIC_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<Characteristic> getCharacteristic() {
         if (characteristic == null) {
             characteristic = new ArrayList<Characteristic>();
@@ -636,7 +654,10 @@ public class Quote
     @OneToMany(targetEntity = RelatedParty.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "RELATED_PARTY_QUOTE_ID")
+    @JoinColumns({
+        @JoinColumn(name = "RELATED_PARTY_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "RELATED_PARTY_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<RelatedParty> getRelatedParty() {
         if (relatedParty == null) {
             relatedParty = new ArrayList<RelatedParty>();
@@ -677,7 +698,11 @@ public class Quote
     @OneToMany(targetEntity = Agreement.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "AGREEMENT_QUOTE_ID")
+    //@JoinColumn(name = "AGREEMENT_QUOTE_ID")
+    @JoinColumns({
+        @JoinColumn(name = "AGREEMENT_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "AGREEMENT_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<Agreement> getAgreement() {
         if (agreement == null) {
             agreement = new ArrayList<Agreement>();
@@ -693,6 +718,51 @@ public class Quote
         this.agreement = agreement;
     }
 
+    /**
+     * Gets the value of the QuoteAuthorization property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the QuoteAuthorization property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getQuoteAuthorization().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link QuoteAuthorization }
+     * 
+     * 
+     */
+    @OneToMany(targetEntity = QuoteAuthorization.class, cascade = {
+        CascadeType.ALL
+    })
+    //@JoinColumn(name = "QUOTE_AUTHORIZATION_QUOTE_ID")
+    @JoinColumns({
+        @JoinColumn(name = "QUOTE_AUTHORIZATION_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "QUOTE_AUTHORIZATION_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
+    public List<QuoteAuthorization> getQuoteAuthorization() {
+        if (quoteAuthorization == null) {
+            quoteAuthorization = new ArrayList<QuoteAuthorization>();
+        }
+        return this.quoteAuthorization;
+    }
+    
+    /**
+     * 
+     * 
+     */
+    public void setQuoteAuthorization(List<QuoteAuthorization> quoteAuthorization) {
+        this.quoteAuthorization = quoteAuthorization;
+    }
+    
     /**
      * Gets the value of the quoteProductOfferingPrice property.
      * 
@@ -718,7 +788,11 @@ public class Quote
     @OneToMany(targetEntity = QuoteProductOfferingPrice.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "QUOTE_PRODUCT_OFFERING_PRICE_0")
+    //@JoinColumn(name = "QUOTE_PRODUCT_OFFERING_PRICE_0")
+    @JoinColumns({
+        @JoinColumn(name = "QUOTE_PRODUCT_OFFERING_PRICE_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "QUOTE_PRODUCT_OFFERING_PRICE_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<QuoteProductOfferingPrice> getQuoteProductOfferingPrice() {
         if (quoteProductOfferingPrice == null) {
             quoteProductOfferingPrice = new ArrayList<QuoteProductOfferingPrice>();
@@ -759,7 +833,11 @@ public class Quote
     @OneToMany(targetEntity = QuoteItem.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "QUOTE_ITEM_QUOTE_ID")
+    //@JoinColumn(name = "QUOTE_ITEM_QUOTE_ID")
+    @JoinColumns({
+        @JoinColumn(name = "QUOTE_ITEM_QUOTE_ID",referencedColumnName = "ID"),
+        @JoinColumn(name = "QUOTE_ITEM_QUOTE_VERSION",referencedColumnName = "VERSION_")
+    })
     public List<QuoteItem> getQuoteItem() {
         if (quoteItem == null) {
             quoteItem = new ArrayList<QuoteItem>();

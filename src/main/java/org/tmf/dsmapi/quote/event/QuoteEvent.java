@@ -7,6 +7,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
 import org.tmf.dsmapi.quote.model.Quote;
 
@@ -40,7 +45,13 @@ public class QuoteEvent implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private QuoteEventTypeEnum eventType;
 
-    private Quote resource; //check for object
+//    @JsonIgnore
+//    @OneToOne(targetEntity = Quote.class, cascade ={ CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.DETACH}, fetch = FetchType.EAGER)
+//    @JoinColumns({
+//        @JoinColumn(name="QUOTE_ID",  referencedColumnName="ID"),
+//        @JoinColumn(name="QUOTE_VERSION", referencedColumnName="VERSION_")
+//    })
+//    private Quote resource; //check for object
 
     @JsonProperty("eventId")
     public String getId() {
@@ -67,14 +78,14 @@ public class QuoteEvent implements Serializable {
         this.eventType = eventType;
     }
 
-    @JsonIgnore
-    public Quote getResource() {
-        return resource;
-    }
-
-    public void setResource(Quote resource) {
-        this.resource = resource;
-    }
+    
+//    public Quote getResource() {
+//        return resource;
+//    }
+//
+//    public void setResource(Quote resource) {
+//        this.resource = resource;
+//    }
 
     @JsonAutoDetect(fieldVisibility = ANY)
     class EventBody {
@@ -87,14 +98,16 @@ public class QuoteEvent implements Serializable {
 		}
     }
 
-	@JsonProperty("event")
-	public EventBody getEvent() {
-	   return new EventBody(getResource() );
-	}
+//	@JsonProperty("event")
+//	public EventBody getEvent() {
+//	   return new EventBody(getResource() );
+//	}
 
     @Override
     public String toString() {
-        return "QuoteEvent{" + "id=" + id + ", eventTime=" + eventTime + ", eventType=" + eventType + ", event=" + resource + '}';
+        return "QuoteEvent{" + "id=" + id + ", eventTime=" + eventTime + ", eventType=" + eventType
+                //+ ", event=" + resource 
+                + '}';
     }
 
 }

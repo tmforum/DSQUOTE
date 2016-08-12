@@ -72,7 +72,7 @@ public class Product
 {
 
     private final static long serialVersionUID = 11L;
-    protected List<RelatedParty> relatedParty;
+    //protected List<RelatedParty> relatedParty;
     protected List<Characteristic> productCharacteristic;
     protected String id;
     protected String href;
@@ -102,24 +102,24 @@ public class Product
      * 
      * 
      */
-    @OneToMany(targetEntity = RelatedParty.class, cascade = {
-        CascadeType.ALL
-    })
-    @JoinColumn(name = "RELATED_PARTY_PRODUCT_HJID")
-    public List<RelatedParty> getRelatedParty() {
-        if (relatedParty == null) {
-            relatedParty = new ArrayList<RelatedParty>();
-        }
-        return this.relatedParty;
-    }
-
-    /**
-     * 
-     * 
-     */
-    public void setRelatedParty(List<RelatedParty> relatedParty) {
-        this.relatedParty = relatedParty;
-    }
+//    @OneToMany(targetEntity = RelatedParty.class, cascade = {
+//        CascadeType.ALL
+//    })
+//    @JoinColumn(name = "RELATED_PARTY_PRODUCT_HJID")
+//    public List<RelatedParty> getRelatedParty() {
+//        if (relatedParty == null) {
+//            relatedParty = new ArrayList<RelatedParty>();
+//        }
+//        return this.relatedParty;
+//    }
+//
+//    /**
+//     * 
+//     * 
+//     */
+//    public void setRelatedParty(List<RelatedParty> relatedParty) {
+//        this.relatedParty = relatedParty;
+//    }
 
     /**
      * Gets the value of the productCharacteristic property.

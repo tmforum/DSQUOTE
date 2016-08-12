@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import javax.persistence.ManyToOne;
 import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
 
 
@@ -65,7 +66,8 @@ import org.tmf.dsmapi.commons.utils.CustomJsonDateSerializer;
     "authorizationDate",
     "authorizationState",
     "authorizationSignatureRepresentation",
-    "attachment"
+    "attachment",
+    "quoteProductOfferingPrice"
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity(name = "QuoteAuthorization")
@@ -83,8 +85,8 @@ public class QuoteAuthorization
     protected Date authorizationDate;
     protected String authorizationState;
     protected String authorizationSignatureRepresentation;
-    protected List<Attachment> attachment;
-    
+    protected Attachment attachment;
+    protected List<QuoteProductOfferingPrice> quoteProductOfferingPrice;
     protected Long hjid;
 
     /**
@@ -166,6 +168,47 @@ public class QuoteAuthorization
         this.authorizationSignatureRepresentation = value;
     }
 
+//    /**
+//     * Gets the value of the attachment property.
+//     * 
+//     * <p>
+//     * This accessor method returns a reference to the live list,
+//     * not a snapshot. Therefore any modification you make to the
+//     * returned list will be present inside the JAXB object.
+//     * This is why there is not a <CODE>set</CODE> method for the attachment property.
+//     * 
+//     * <p>
+//     * For example, to add a new item, do as follows:
+//     * <pre>
+//     *    getAttachment().add(newItem);
+//     * </pre>
+//     * 
+//     * 
+//     * <p>
+//     * Objects of the following type(s) are allowed in the list
+//     * {@link Attachment }
+//     * 
+//     * 
+//     */
+//    @OneToMany(targetEntity = Attachment.class, cascade = {
+//        CascadeType.ALL
+//    })
+//    @JoinColumn(name = "ATTACHMENT_QUOTE_AUTHORIZATI_0")
+//    public List<Attachment> getAttachment() {
+//        if (attachment == null) {
+//            attachment = new ArrayList<Attachment>();
+//        }
+//        return this.attachment;
+//    }
+
+//    /**
+//     * 
+//     * 
+//     */
+//    public void setAttachment(List<Attachment> attachment) {
+//        this.attachment = attachment;
+//    }
+
     /**
      * Gets the value of the attachment property.
      * 
@@ -188,14 +231,11 @@ public class QuoteAuthorization
      * 
      * 
      */
-    @OneToMany(targetEntity = Attachment.class, cascade = {
+    @ManyToOne(targetEntity = Attachment.class, cascade = {
         CascadeType.ALL
     })
-    @JoinColumn(name = "ATTACHMENT_QUOTE_AUTHORIZATI_0")
-    public List<Attachment> getAttachment() {
-        if (attachment == null) {
-            attachment = new ArrayList<Attachment>();
-        }
+    @JoinColumn(name = "ATTACHMENT_QUOTE_AUTHORIZATION_HJID")
+    public Attachment getAttachment() {
         return this.attachment;
     }
 
@@ -203,10 +243,32 @@ public class QuoteAuthorization
      * 
      * 
      */
-    public void setAttachment(List<Attachment> attachment) {
+    public void setAttachment(Attachment attachment) {
         this.attachment = attachment;
     }
+    
+    
+    
+    @OneToMany(targetEntity = QuoteProductOfferingPrice.class, cascade = {
+        CascadeType.ALL
+    })
+    @JoinColumn(name = "QUOTE_PRODUCT_OFFERING_PRICE")
+    public List<QuoteProductOfferingPrice> getQuoteProductOfferingPrice() {
+        if (quoteProductOfferingPrice == null) {
+            quoteProductOfferingPrice = new ArrayList<QuoteProductOfferingPrice>();
+        }
+        return this.quoteProductOfferingPrice;
+    }
 
+    /**
+     * 
+     * 
+     */
+    public void setQuoteProductOfferingPrice(List<QuoteProductOfferingPrice> quoteProductOfferingPrice) {
+        this.quoteProductOfferingPrice = quoteProductOfferingPrice;
+    }
+    
+    
     /**
      * Obtient la valeur de la propriété hjid.
      * 
@@ -235,4 +297,50 @@ public class QuoteAuthorization
         this.hjid = value;
     }
 
+    public boolean equals(QuoteAuthorization quoteAuthor) {
+        if ((null!=this.getAttachment() && null!= quoteAuthor.getAttachment() 
+                && !this.getAttachment().equals(quoteAuthor.getAttachment()))
+                || null!=this.getAttachment()&& null==quoteAuthor.getAttachment()
+                || null==this.getAttachment()&& null!=quoteAuthor.getAttachment() ) {
+            return false;
+        }
+        
+        if ((null!=this.getAuthorizationDate() && null!= quoteAuthor.getAuthorizationDate() 
+                && !this.getAuthorizationDate().equals(quoteAuthor.getAuthorizationDate()))
+                || null!=this.getAuthorizationDate()&& null==quoteAuthor.getAuthorizationDate()
+                || null==this.getAuthorizationDate()&& null!=quoteAuthor.getAuthorizationDate() ) {
+            return false;
+        }
+        
+        if ((null!=this.getAuthorizationSignatureRepresentation() && null!= quoteAuthor.getAuthorizationSignatureRepresentation() 
+                && !this.getAuthorizationSignatureRepresentation().equals(quoteAuthor.getAuthorizationSignatureRepresentation()))
+                || null!=this.getAuthorizationSignatureRepresentation()&& null==quoteAuthor.getAuthorizationSignatureRepresentation()
+                || null==this.getAuthorizationSignatureRepresentation()&& null!=quoteAuthor.getAuthorizationSignatureRepresentation() ) {
+            return false;
+        }
+        
+        if ((null!=this.getAuthorizationState() && null!= quoteAuthor.getAuthorizationState() 
+                && !this.getAuthorizationState().equals(quoteAuthor.getAuthorizationState()))
+                || null!=this.getAuthorizationState()&& null==quoteAuthor.getAuthorizationState()
+                || null==this.getAuthorizationState()&& null!=quoteAuthor.getAuthorizationState() ) {
+            return false;
+        }
+    
+        if (null!=this.getQuoteProductOfferingPrice()&& null!=quoteAuthor.getQuoteProductOfferingPrice()){
+            if (this.getQuoteProductOfferingPrice().size() == quoteAuthor.getQuoteProductOfferingPrice().size()) {
+                for (int i=0; i<this.getQuoteProductOfferingPrice().size(); i++ ) {
+                    if(!this.getQuoteProductOfferingPrice().get(i).equals(quoteAuthor.getQuoteProductOfferingPrice().get(i))) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }else if (null!=this.getQuoteProductOfferingPrice()&& null==quoteAuthor.getQuoteProductOfferingPrice()
+                || null==this.getQuoteProductOfferingPrice()&& null!=quoteAuthor.getQuoteProductOfferingPrice()){
+            return false;
+        }
+        return true;
+    }
 }
